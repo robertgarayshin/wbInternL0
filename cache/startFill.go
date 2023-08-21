@@ -1,0 +1,13 @@
+package cache
+
+import (
+	"database/sql"
+	"wbInternL0/repository/read"
+)
+
+func (c *Cache) StartFill(db *sql.DB) {
+	orders := read.ReadAll(db)
+	for i := range orders {
+		c.Set(orders[i].OrderUid, orders[i])
+	}
+}

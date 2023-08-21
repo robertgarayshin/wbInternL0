@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080"/>
+    <meta charset="UTF-8">
+    <title>{{ .Title }}</title>
+</head>
+<body>
+<h1>{{ .Title }}</h1>
+<h2>Order Info</h2>
+<b>Order</b> #{{ .Order.OrderUid }} <br>
+<b>Track number</b> {{ .Order.TrackNumber }} <br>
+<b>Entry</b> {{ .Order.Entry }} <br>
+<b>Locale</b> {{ .Order.Locale }} <br>
+<b>Internal Signature</b> {{ .Order.InternalSignature }}<br>
+<b>Customer ID</b> {{ .Order.CustomerId }}<br>
+<b>Delivery Service</b> {{ .Order.DeliveryService}}<br>
+<b>Shardkey</b> {{.Order.Shardkey}}<br>
+<b>SM ID</b> {{.Order.SmId}}<br>
+<b>Date Created</b> {{.Order.DateCreated}}<br>
+<b>OOF Shard</b> {{.Order.OofShard}}<br>
+<br>
+<h2>Delivery Info</h2>
+<b>Name</b> {{.Order.Delivery.Name}}<br>
+<b>Phone</b> {{.Order.Delivery.Phone}}<br>
+<b>ZIP Code</b> {{.Order.Delivery.Zip}}<br>
+<b>City</b> {{.Order.Delivery.City}}<br>
+<b>Address</b> {{.Order.Delivery.Address}}<br>
+<b>Region</b> {{.Order.Delivery.Region}}<br>
+<b>Email</b> {{.Order.Delivery.Email}}<br>
+<br>
+<h2>Payment Info</h2>
+<b>Transaction</b> #{{.Order.Payment.Transaction}}<br>
+<b>Request ID</b> {{.Order.Payment.RequestId}}<br>
+<b>Currency</b> {{.Order.Payment.Currency}}<br>
+<b>Provider</b> {{.Order.Payment.Provider}}<br>
+<b>Amount</b> {{.Order.Payment.Amount}}<br>
+<b>Payment DT</b> {{.Order.Payment.PaymentDt}}<br>
+<b>Bank</b> {{.Order.Payment.Bank}}<br>
+<b>Delivery cost</b> {{.Order.Payment.DeliveryCost}}<br>
+<b>Goods total</b> {{.Order.Payment.GoodsTotal}}<br>
+<b>Custom fee</b> {{.Order.Payment.CustomFee}}<br>
+<br>
+<h2>Items in order</h2>
+<table cellspacing="3" bgcolor="#000000">
+    <thead>
+    <tr bgcolor="#ffffff">
+        <th>CHRT ID</th>
+        <th>Track Number</th>
+        <th>Price</th>
+        <th>RID</th>
+        <th>Name</th>
+        <th>Sale</th>
+        <th>Size</th>
+        <th>Total Price</th>
+        <th>NM ID</th>
+        <th>Brand</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{ range .Items }}
+    <tr bgcolor="#ffffff">
+        <td>{{ .ChrtId }}</td>
+        <td>{{ .TrackNumber }}</td>
+        <td>{{ .Price }}</td>
+        <td>{{ .Rid }}</td>
+        <td>{{ .Name }}</td>
+        <td>{{ .Sale }}</td>
+        <td>{{ .Size }}</td>
+        <td>{{ .TotalPrice }}</td>
+        <td>{{ .NmId }}</td>
+        <td>{{ .Brand }}</td>
+        <td>{{ .Status }}</td>
+    </tr>
+    {{ end }}
+    </tbody>
+</table>
+<a href="http://localhost:8080/orders">Back to orders list</a>
+</body>
+</html>

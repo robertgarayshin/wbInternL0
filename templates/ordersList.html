@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080"/>
+    <meta charset="UTF-8">
+    <title>{{ .Title}}</title>
+</head>
+<body>
+<h1>{{ .Title}}</h1>
+<ul>
+    {{range .OrderIds}}
+
+    <li><b><a href="http://localhost:8080/orders/{{.}}"> {{ . }} </a></b></li>
+    {{end}}
+</ul>
+</body>
+</html>
