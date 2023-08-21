@@ -13,7 +13,7 @@ import (
 )
 
 func Consumer(ctx context.Context, db *sql.DB, c *cache.Cache) {
-
+	// Получаетль сообщений
 	nc, err := nats.Connect(nats.DefaultURL)
 	if err != nil {
 		log.Fatal("Failed to connect to NATS server:", err)
@@ -25,13 +25,13 @@ func Consumer(ctx context.Context, db *sql.DB, c *cache.Cache) {
 	subject := config.SubjectNameCreated
 	messages := make(chan *nats.Msg, 1000)
 
-	// we're subscribing to the subject
-	// and assigning our channel as reference to receive messages there
+	// Подписываемся на нужный канал
 	subscription, err := nc.ChanSubscribe(subject, messages)
 	if err != nil {
 		log.Fatal("Failed to subscribe to subject:", err)
 	}
 
+	// Отложенно отписываемся и закрывам канал передачи сообщений
 	defer func() {
 		subscription.Unsubscribe()
 		close(messages)
@@ -41,16 +41,20 @@ func Consumer(ctx context.Context, db *sql.DB, c *cache.Cache) {
 	var order models.Order
 	for {
 		select {
+		// Если пришел сигнал завершения
 		case <-ctx.Done():
 			log.Println("Exiting from consumer")
 			return
+		// Если пришло новое сообщение
 		case msg := <-messages:
 			log.Println("Received", string(msg.Data))
 			err := json.Unmarshal(msg.Data, &order)
 			if err != nil {
 				log.Fatal(err)
 			}
+			// Записываем в БД
 			err = write.NewOrder(db, order)
+			// Записываем в кэш
 			c.Set(order.OrderUid, order)
 			if err != nil {
 				log.Fatal(err)

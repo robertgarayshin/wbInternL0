@@ -9,6 +9,7 @@ import (
 	"wbInternL0/models"
 )
 
+// Ручка для получния всех заказов
 func allOrdersHandler(w http.ResponseWriter, r *http.Request) {
 	var keys []string
 	for key := range c.Orders {
@@ -30,6 +31,7 @@ func allOrdersHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Ручка для получения заказа по ID
 func orderByIdHandler(w http.ResponseWriter, r *http.Request) {
 	type ViewData struct {
 		Title string
@@ -50,6 +52,7 @@ func orderByIdHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Ручка Index
 func mainHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, _ := template.ParseFiles("templates/index.html")
 	type viewData struct {

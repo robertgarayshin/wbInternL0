@@ -5,6 +5,7 @@ import (
 )
 
 func (c *Cache) Get(key string) (models.Order, bool) {
+	// Получение элемента из кэша по ключу
 	c.RLock()
 
 	defer c.RUnlock()

@@ -1,5 +1,6 @@
 package config
 
+// Данные для подключения к БД
 const (
 	user     = "user=robert_admin"
 	password = "password=passwd"

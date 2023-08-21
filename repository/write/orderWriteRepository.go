@@ -6,6 +6,7 @@ import (
 )
 
 func NewOrder(db *sql.DB, order models.Order) error {
+	// Метод для записи нового заказа в БД
 	query := "INSERT INTO orders (orderuid, tracknumber, entry, name, phone, zip, city, address," +
 		"region, email, transaction, requestid, currency, provider, amount, paymentdt, bank, deliverycost, goodstotal, " +
 		"customfee, locale, internalsignature, customerid, deliveryservice, shardkey, smid, datecreated, oofshard) " +

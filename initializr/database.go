@@ -8,6 +8,7 @@ import (
 )
 
 func DbConnectionInit() (*sql.DB, error) {
+	// Инициализируем подключение к БД
 	db, err := sql.Open("postgres", config.ConnStr)
 	if err != nil {
 		log.Println(err)

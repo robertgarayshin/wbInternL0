@@ -18,6 +18,7 @@ func (m msg) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 }
 
 func Serve(ctx context.Context) {
+	// Задаем параметры сервера и пути
 	server := http.Server{Addr: ":8080"}
 	router := mux.NewRouter()
 	router.HandleFunc("/orders", allOrdersHandler)
@@ -30,6 +31,7 @@ func Serve(ctx context.Context) {
 			return
 		}
 	}()
+	// Проверяем, что у нас не подан сигнал на завершение работы
 	for {
 		select {
 		case <-ctx.Done():

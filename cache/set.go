@@ -5,7 +5,7 @@ import (
 )
 
 func (c *Cache) Set(key string, order models.Order) {
-
+	// Вставка элемента в кэш
 	c.Lock()
 
 	defer c.Unlock()

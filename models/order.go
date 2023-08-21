@@ -5,6 +5,7 @@ import (
 )
 
 type Order struct {
+	// Модель заказа
 	OrderUid    string `json:"order_uid"`
 	TrackNumber string `json:"track_number"`
 	Entry       string `json:"entry"`

@@ -7,6 +7,7 @@ import (
 )
 
 func ReadAll(db *sql.DB) []models.Order {
+	// Метод чтения всех заказов (для инициализации кэша)
 	var orders []models.Order
 	rows, err := db.Query("select * from orders")
 	if err != nil {

@@ -1,5 +1,6 @@
 package config
 
+// Данные для подключения к JetStream
 const (
 	StreamName     = "Name"
 	StreamSubjects = "Subjects.*"
